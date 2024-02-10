@@ -1,4 +1,4 @@
-# Yet Another NodeJS Package Manager
+# Yet Another NodeJS Package Manager (YPM)
 
 `YPM` is not a normal package manager. It is a batteries-included, auto-detecting, modular package managing system.
 
