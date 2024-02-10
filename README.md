@@ -6,6 +6,17 @@ What does this mean? Well, unlike the other package managers, you can use `YPM` 
 
 ## Commands
 
+There are a few reserved keywords for `ypm`. Currently, those are:
+
+1. init
+2. add
+3. remove
+4. wksp
+
+These reserved words (if your project matches these works) will need to be invoked using the `wksp` namespace to invoke a workspace, by name, that conflicts with a reserved keyword.
+
+---
+
 This creates a `package.json` with the `name` that was passed in and a default version of `0.0.1`.
 
 ```bash
@@ -19,3 +30,17 @@ ypm init <name>@<version>
 ```
 
 ---
+
+## WIP
+
+This is how you can invoke a script from a workspace by its name.
+
+```bash
+ypm @myproject/app dev
+```
+
+If there is a namespace conflict between a package name and a reserved keyword in `ypm` you can accomplish the same result as the example above doing this.
+
+```bash
+ypm wksp @myproject/app dev
+```
