@@ -2,24 +2,27 @@ package main
 
 import (
 	"context"
-	"log"
 	"os"
 
+	"jgttech/ypm/cmds/add"
+	create "jgttech/ypm/cmds/init"
+	"jgttech/ypm/utils"
+
 	"github.com/urfave/cli/v3"
-	"jgttech/ypm/cmds"
 )
 
 func main() {
 	cmd := &cli.Command{
-		Name:  "ypm",
-		Usage: "Yet Another NodeJS Package Manager (ypm)",
+		Name:    "ypm",
+		Usage:   "Yet Another NodeJS Package Manager (ypm)",
+		Suggest: true,
 		Commands: []*cli.Command{
-			cmds.Init(),
-			cmds.Add(),
+			add.Cmd(),
+			create.Cmd(),
 		},
 	}
 
 	if err := cmd.Run(context.Background(), os.Args); err != nil {
-		log.Fatal(err)
+		utils.Error(err)
 	}
 }
