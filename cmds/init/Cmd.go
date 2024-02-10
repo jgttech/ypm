@@ -32,13 +32,12 @@ func Cmd() *cli.Command {
 				version = project[1]
 			}
 
-			json.WritePackageJson(cwd, struct {
-				Name    string `json:"name"`
-				Version string `json:"version"`
-			}{
+			nvj := json.NameVersionJson{
 				Name:    name,
 				Version: version,
-			})
+			}
+
+			nvj.WritePackageJson(cwd)
 
 			return nil
 		},

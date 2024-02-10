@@ -7,9 +7,9 @@ import (
 	"path"
 )
 
-func WritePackageJson(basePath string, data any) {
+func (nvj NameVersionJson) WritePackageJson(basePath string) {
 	pkgPath := path.Join(basePath, "package.json")
-	file, err := json.MarshalIndent(data, "", "  ")
+	file, err := json.MarshalIndent(nvj, "", "  ")
 	utils.Check(err)
 
 	os.WriteFile(pkgPath, file, os.FileMode(0644))
