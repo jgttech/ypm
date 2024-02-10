@@ -6,7 +6,16 @@ What does this mean? Well, unlike the other package managers, you can use `YPM` 
 
 ## Commands
 
-| Command                                     | Description                                                                                |
-| :------------------------------------------ | :----------------------------------------------------------------------------------------- |
-| `ypm init <project_name>`                   | Creates a `package.json` file with the name specified and defaults the version to `0.0.1`. |
-| `ypm init <project_name>@<project_version>` | Creates a `package.json` file with the name and version specified.                         |
+This creates a `package.json` with the `name` that was passed in and a default version of `0.0.1`.
+
+```bash
+ypm init <name>
+```
+
+This creates a `package.json` file with both the `name` and `version` set to whatever is passed in.
+
+```bash
+ypm init <name>@<version>
+```
+
+---
