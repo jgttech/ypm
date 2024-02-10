@@ -23,6 +23,6 @@ func main() {
 	}
 
 	if err := cmd.Run(context.Background(), os.Args); err != nil {
-		utils.Error(err)
+		utils.Check(err)
 	}
 }

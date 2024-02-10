@@ -10,7 +10,7 @@ import (
 
 func ReadPackageJson(dirPath string) models.PackageJson {
 	data, err := os.ReadFile(filepath.Join(dirPath, "package.json"))
-	utils.Error(err)
+	utils.Check(err)
 
 	jsonData := models.PackageJson{}
 
