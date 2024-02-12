@@ -20,9 +20,12 @@ func ReadJson[T any](filePath string) *T {
 		utils.Check(err)
 
 		data := make(map[string]any)
-		err = json.Unmarshal(file, &data)
 
-		mapstructure.Decode(data, &result)
+		err = json.Unmarshal(file, &data)
+		utils.Check(err)
+
+		err = mapstructure.Decode(data, &result)
+		utils.Check(err)
 
 		return &result
 	}
