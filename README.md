@@ -20,9 +20,13 @@ There are a few reserved keywords for `ypm`. Currently, those are:
 
 ---
 
+This creates a `package.json` with a specific name, with the default version of `0.0.1`, and generates the `YPM` configuration directory `.ypm`.
+
 ```bash
 ypm repo <name>
 ```
+
+This does the same thing as the other command but assigns it to a specific version.
 
 ```bash
 ypm repo <name>@<version>
