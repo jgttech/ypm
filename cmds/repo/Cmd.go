@@ -1,26 +1,27 @@
-package init
+package repo
 
 import (
 	"context"
 	"fmt"
-	"jgttech/ypm/utils"
 	"path"
+
+	create "jgttech/ypm/cmds/init"
+	"jgttech/ypm/utils"
 
 	"github.com/urfave/cli/v3"
 )
 
 func Cmd() *cli.Command {
 	return &cli.Command{
-		Name:    "init",
-		Usage:   "Initializes a YPM repo.",
-		Suggest: true,
+		Name:  "repo",
+		Usage: "Creates the initial repo setup for the YPM package manager",
 		Action: func(ctx context.Context, cmd *cli.Command) error {
 			cwd := path.Join(utils.Cwd())
 			confPath := path.Join(cwd, "package.json")
 			confExists := utils.PathExists(confPath)
 
 			if !confExists {
-				CreatePackageJson(ctx, cmd)
+				create.CreatePackageJson(ctx, cmd)
 			} else {
 				fmt.Println("Package already has a \"package.json\". No \"package.json\" created.")
 			}

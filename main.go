@@ -6,6 +6,7 @@ import (
 
 	"jgttech/ypm/cmds/add"
 	create "jgttech/ypm/cmds/init"
+	"jgttech/ypm/cmds/repo"
 	"jgttech/ypm/utils"
 
 	"github.com/urfave/cli/v3"
@@ -17,8 +18,9 @@ func main() {
 		Usage:   "Yet Another NodeJS Package Manager (ypm)",
 		Suggest: true,
 		Commands: []*cli.Command{
-			add.Cmd(),
 			create.Cmd(),
+			repo.Cmd(),
+			add.Cmd(),
 		},
 	}
 
