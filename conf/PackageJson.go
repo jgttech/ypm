@@ -33,10 +33,10 @@ func (conf PackageJson) Read(dir string) *PackageJson {
 		errors.PathNotFound(dir)
 	} else {
 		confPath := path.Join(dir, "package.json")
-		jsonData := fsutils.ReadJson(confPath)
+		confData := fsutils.ReadJson[PackageJson](confPath)
 
-		if jsonData != nil {
-			return jsonData.(*PackageJson)
+		if confData != nil {
+			return confData
 		}
 	}
 
