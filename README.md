@@ -6,6 +6,10 @@ WARNING: DO NOT USE!! This is still a work-in-progress.
 
 What does this mean? Well, unlike the other package managers, you can use `YPM` for a single repo or a monorepo, out of the box. No configuration is needed to support either use case. The only thing required to detect another workspace, automatically, is the existence of a `package.json` file in a directory and a `name` property to identify one workspace from another by their names.
 
+## About
+
+Why Go? Go has proven to not only be a very performant general purpose system programming language, but it builds a static binary, and it is easy to learn and make building performant solution easier to maintain. There are other benefits like being a function-oriented programming language, however, the biggest gains are that reduction is execution overhead and memory usage. Traditional JS/TS solutions use or require NodeJS to manage packages, which means they do not have the same level of control, performance, or memory efficiency as Go has. The fundamental idea was to be able to remove the package manager as a performance bottleneck, extend it beyond NodeJS, and leverage the performance gains. An example of a successful use case for this is ESBuild, which is currently one of the fastest growing JS/TS bundlers in the ecosystem, known for its performance, and written in Go. I hope to achieve the same goals here, but as a package manager.
+
 ## Commands
 
 There are a few reserved keywords for `ypm`. Currently, those are:
