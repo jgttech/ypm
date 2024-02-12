@@ -3,7 +3,7 @@ package init
 import (
 	"context"
 	"fmt"
-	"jgttech/ypm/json"
+	"jgttech/ypm/conf"
 	"jgttech/ypm/utils"
 	"path"
 	"strings"
@@ -32,12 +32,12 @@ func Cmd() *cli.Command {
 				version = project[1]
 			}
 
-			nvj := json.NameVersionJson{
+			pkg := conf.InitPackageJson{
 				Name:    name,
 				Version: version,
 			}
 
-			nvj.WritePackageJson(cwd)
+			pkg.Write(cwd)
 
 			return nil
 		},
