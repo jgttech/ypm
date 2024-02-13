@@ -10,7 +10,7 @@ import (
 )
 
 const CONF_DIR string = ".ypm"
-const WORKSPACES string = CONF_DIR + "/workspaces"
+const WORKSPACES string = CONF_DIR + "/config.yml"
 
 func CreateYpmConfig(ctx context.Context, cmd *cli.Command) {
 	// No need to read the args passed in because, by the time
