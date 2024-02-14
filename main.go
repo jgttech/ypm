@@ -7,6 +7,7 @@ import (
 	"jgttech/ypm/cmds/add"
 	create "jgttech/ypm/cmds/init"
 	"jgttech/ypm/cmds/repo"
+	"jgttech/ypm/cmds/sync"
 	"jgttech/ypm/utils"
 
 	"github.com/urfave/cli/v3"
@@ -20,6 +21,7 @@ func main() {
 		Commands: []*cli.Command{
 			create.Cmd(),
 			repo.Cmd(),
+			sync.Cmd(),
 			add.Cmd(),
 		},
 	}
