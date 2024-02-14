@@ -2,7 +2,6 @@ package repo
 
 import (
 	"context"
-	"path"
 
 	create "jgttech/ypm/cmds/init"
 	"jgttech/ypm/utils"
@@ -16,16 +15,14 @@ func Cmd() *cli.Command {
 		Suggest: true,
 		Usage:   "Creates the initial repo setup for the YPM package manager",
 		Action: func(ctx context.Context, cmd *cli.Command) error {
-			cwd := path.Join(utils.Cwd())
-
-			confPath := path.Join(cwd, "package.json")
+			confPath := utils.Join("package.json")
 			confExists := utils.PathExists(confPath)
 
 			if !confExists {
 				create.CreatePackageJson(ctx, cmd)
 			}
 
-			ypmPath := path.Join(cwd, ".ypm")
+			ypmPath := utils.Join(".ypm")
 			ypmExists := utils.PathExists(ypmPath)
 
 			if !ypmExists {

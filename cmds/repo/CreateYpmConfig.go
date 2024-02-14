@@ -5,7 +5,6 @@ import (
 	"jgttech/ypm/conf"
 	"jgttech/ypm/utils"
 	"os"
-	"path"
 
 	"github.com/urfave/cli/v3"
 )
@@ -19,9 +18,9 @@ func CreateYpmConfig(ctx context.Context, cmd *cli.Command) {
 	// can use that information to build the initial config for
 	// YPM, itself.
 
-	pkgPath := path.Join(utils.Cwd(), "package.json")
+	pkgPath := utils.Join("package.json")
 	pkgConf := utils.ReadJson[conf.InitPackageJson](pkgPath)
-	ypmPath := path.Join(utils.Cwd(), CONF_DIR)
+	ypmPath := utils.Join(CONF_DIR)
 
 	os.MkdirAll(ypmPath, os.ModePerm)
 
