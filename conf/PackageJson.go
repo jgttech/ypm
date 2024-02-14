@@ -2,7 +2,6 @@ package conf
 
 import (
 	"jgttech/ypm/errors"
-	"jgttech/ypm/fsutils"
 	"jgttech/ypm/utils"
 	"path"
 )
@@ -22,7 +21,7 @@ func (conf PackageJson) Write(dir string) {
 		errors.PathNotFound(dir)
 	} else {
 		confPath := path.Join(dir, "package.json")
-		fsutils.WriteJson(confPath, conf)
+		utils.WriteJson(confPath, conf)
 	}
 }
 
@@ -33,7 +32,7 @@ func (conf PackageJson) Read(dir string) *PackageJson {
 		errors.PathNotFound(dir)
 	} else {
 		confPath := path.Join(dir, "package.json")
-		confData := fsutils.ReadJson[PackageJson](confPath)
+		confData := utils.ReadJson[PackageJson](confPath)
 
 		if confData != nil {
 			return confData

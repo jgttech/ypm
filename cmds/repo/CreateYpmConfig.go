@@ -2,6 +2,7 @@ package repo
 
 import (
 	"context"
+	"jgttech/ypm/conf"
 	"jgttech/ypm/utils"
 	"os"
 	"path"
@@ -10,7 +11,7 @@ import (
 )
 
 const CONF_DIR string = ".ypm"
-const WORKSPACES string = CONF_DIR + "/config.yml"
+const REPO_CONFIG string = CONF_DIR + "/repo.yml"
 
 func CreateYpmConfig(ctx context.Context, cmd *cli.Command) {
 	// No need to read the args passed in because, by the time
@@ -18,9 +19,20 @@ func CreateYpmConfig(ctx context.Context, cmd *cli.Command) {
 	// can use that information to build the initial config for
 	// YPM, itself.
 
-	// pkgPath := path.Join(utils.Cwd(), "package.json")
-	// pkgConf := fsutils.ReadJson[conf.InitPackageJson](pkgPath)
+	pkgPath := path.Join(utils.Cwd(), "package.json")
+	pkgConf := utils.ReadJson[conf.InitPackageJson](pkgPath)
 	ypmPath := path.Join(utils.Cwd(), CONF_DIR)
 
 	os.MkdirAll(ypmPath, os.ModePerm)
+
+	ypmConf := &conf.YpmConfigYaml{
+		Workspaces: []conf.YpmConfigWorkspace{
+			{
+				Name: pkgConf.Name,
+				Path: ".",
+			},
+		},
+	}
+
+	ypmConf.Write(REPO_CONFIG)
 }

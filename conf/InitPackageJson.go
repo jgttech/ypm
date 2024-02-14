@@ -2,7 +2,6 @@ package conf
 
 import (
 	"jgttech/ypm/errors"
-	"jgttech/ypm/fsutils"
 	"jgttech/ypm/utils"
 	"path"
 )
@@ -18,6 +17,6 @@ func (conf InitPackageJson) Write(dir string) {
 	if !exists {
 		errors.PathNotFound(dir)
 	} else {
-		fsutils.WriteJson(path.Join(dir, "package.json"), conf)
+		utils.WriteJson(path.Join(dir, "package.json"), conf)
 	}
 }
