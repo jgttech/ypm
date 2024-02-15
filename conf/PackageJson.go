@@ -1,6 +1,7 @@
 package conf
 
 import (
+	"jgttech/ypm/env"
 	"jgttech/ypm/errors"
 	"jgttech/ypm/utils"
 	"path"
@@ -20,7 +21,8 @@ func (conf PackageJson) Write(dir string) {
 	if !exists {
 		errors.PathNotFound(dir)
 	} else {
-		confPath := path.Join(dir, "package.json")
+		fileName := env.GetEnv().Repofile.Name
+		confPath := path.Join(dir, fileName)
 		utils.WriteJson(confPath, conf)
 	}
 }
@@ -31,7 +33,8 @@ func (conf PackageJson) Read(dir string) *PackageJson {
 	if !exists {
 		errors.PathNotFound(dir)
 	} else {
-		confPath := path.Join(dir, "package.json")
+		fileName := env.GetEnv().Repofile.Name
+		confPath := path.Join(dir, fileName)
 		confData := utils.ReadJson[PackageJson](confPath)
 
 		if confData != nil {

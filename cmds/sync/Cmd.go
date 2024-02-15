@@ -3,11 +3,12 @@ package sync
 import (
 	"context"
 	"fmt"
+	"jgttech/ypm/conf"
 
 	"github.com/urfave/cli/v3"
 )
 
-func Cmd() *cli.Command {
+func Cmd(etx *conf.ExecutionContext) *cli.Command {
 	return &cli.Command{
 		Name:    "sync",
 		Suggest: true,

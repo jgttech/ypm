@@ -1,6 +1,7 @@
 package conf
 
 import (
+	"jgttech/ypm/env"
 	"jgttech/ypm/errors"
 	"jgttech/ypm/utils"
 	"path"
@@ -17,6 +18,7 @@ func (conf InitPackageJson) Write(dir string) {
 	if !exists {
 		errors.PathNotFound(dir)
 	} else {
-		utils.WriteJson(path.Join(dir, "package.json"), conf)
+		fileName := env.GetEnv().Repofile.Name
+		utils.WriteJson(path.Join(dir, fileName), conf)
 	}
 }
