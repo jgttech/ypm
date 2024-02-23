@@ -3,7 +3,7 @@ package init
 import (
 	"context"
 	"jgttech/ypm/conf"
-	tuiSpinner "jgttech/ypm/tui/tui-spinner"
+	"jgttech/ypm/tui/spinner"
 	"time"
 
 	"github.com/urfave/cli/v3"
@@ -15,21 +15,15 @@ func Cmd(etx *conf.ExecutionContext) *cli.Command {
 		Usage:   "Initializes a YPM repo.",
 		Suggest: true,
 		Action: func(ctx context.Context, cmd *cli.Command) error {
-			spinner := tuiSpinner.New()
-
-			spinner.Run(tuiSpinner.Runner{
+			spinnerIndicator := spinner.New{
 				Msg: "Initializing workspace, please wait...",
-				Init: func() {
-					time.Sleep(3 * time.Second)
+				Init: func() (int, string) {
+					time.Sleep(2 * time.Second)
+					return 1, ""
 				},
-			})
+			}
 
-			spinner.Run(tuiSpinner.Runner{
-				Msg: "Updating repo state...",
-				Init: func() {
-					time.Sleep(3 * time.Second)
-				},
-			})
+			spinnerIndicator.Run()
 
 			return nil
 		},

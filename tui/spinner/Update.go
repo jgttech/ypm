@@ -1,4 +1,4 @@
-package tuiSpinner
+package spinner
 
 import (
 	"github.com/charmbracelet/bubbles/spinner"
@@ -7,16 +7,28 @@ import (
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
-	case string:
-		switch msg {
-		case "exit":
-			m.exit = true
+	case cmd:
+		m.info = msg.info
+		m.status = msg.status
+
+		if msg.exit {
+			if m.quit != nil {
+				m.quit()
+			}
+
 			return m, tea.Quit
 		}
+
+		return m, nil
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "ctrl+c", "esc", "q":
 			m.exit = true
+
+			if m.quit != nil {
+				m.quit()
+			}
+
 			return m, tea.Quit
 		}
 	case spinner.TickMsg:
