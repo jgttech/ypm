@@ -2,19 +2,22 @@ package main
 
 import (
 	"context"
-	"os"
-
 	"jgttech/ypm/cmds/add"
 	create "jgttech/ypm/cmds/init"
+	"jgttech/ypm/cmds/remove"
 	"jgttech/ypm/cmds/repo"
 	"jgttech/ypm/cmds/sync"
 	"jgttech/ypm/conf"
 	"jgttech/ypm/utils"
+	"os"
 
 	"github.com/urfave/cli/v3"
+	// "jgttech/ypm/utils"
 )
 
 func main() {
+	defer utils.Timer("Execution")()
+
 	// Create an execution context that updates and loads
 	// the state of the repo before running any commands.
 	// This creates the capability to ensure that the latest
@@ -25,6 +28,8 @@ func main() {
 	// Loads the config into memory.
 	etx.Load()
 
+	// fmt.Printf("%#v\n", etx)
+
 	cmd := &cli.Command{
 		Name:    "ypm",
 		Usage:   "Yet Another NodeJS Package Manager (ypm)",
@@ -34,6 +39,7 @@ func main() {
 			repo.Cmd(etx),
 			sync.Cmd(etx),
 			add.Cmd(etx),
+			remove.Cmd(etx),
 		},
 	}
 

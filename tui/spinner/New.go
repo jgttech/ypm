@@ -1,8 +1,10 @@
 package spinner
 
 import (
+	"fmt"
 	"jgttech/ypm/exceptions"
 	"jgttech/ypm/tui"
+	"os"
 
 	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
@@ -18,7 +20,7 @@ type New struct {
 	Quit Quit
 }
 
-func (instance New) Run() {
+func (instance New) Run() (int, string) {
 	m := model{
 		msg:  instance.Msg,
 		done: instance.Done,
@@ -30,7 +32,18 @@ func (instance New) Run() {
 	m.spinner.Style = tui.SpinnerStyle
 	m.spinner.Spinner = spinner.MiniDot
 
-	if _, err := tea.NewProgram(m).Run(); err != nil {
+	result, err := tea.NewProgram(m).Run()
+	response := result.(model)
+	errorMsg := response.err
+
+	if err != nil {
 		exceptions.UnknownError(err)
 	}
+
+	if errorMsg != "" {
+		fmt.Println("\n" + errorMsg)
+		os.Exit(1)
+	}
+
+	return response.status, response.info
 }

@@ -10,6 +10,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case cmd:
 		m.info = msg.info
 		m.status = msg.status
+		m.err = msg.err
 
 		if msg.exit {
 			if m.quit != nil {
