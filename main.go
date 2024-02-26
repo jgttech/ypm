@@ -12,23 +12,11 @@ import (
 	"os"
 
 	"github.com/urfave/cli/v3"
-	// "jgttech/ypm/utils"
 )
 
 func main() {
 	defer utils.Timer("Execution")()
-
-	// Create an execution context that updates and loads
-	// the state of the repo before running any commands.
-	// This creates the capability to ensure that the latest
-	// changes to the repo are recorded and updated within
-	// the configuration.
-	etx := &conf.ExecutionContext{}
-
-	// Loads the config into memory.
-	etx.Load()
-
-	// fmt.Printf("%#v\n", etx)
+	etx := conf.NewExecutionContext()
 
 	cmd := &cli.Command{
 		Name:    "ypm",
@@ -46,4 +34,6 @@ func main() {
 	if err := cmd.Run(context.Background(), os.Args); err != nil {
 		utils.Check(err)
 	}
+
+	etx.Sync()
 }

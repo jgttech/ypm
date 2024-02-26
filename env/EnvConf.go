@@ -1,5 +1,7 @@
 package env
 
+import "runtime"
+
 type envConfRepofile struct {
 	Name    string
 	Version string
@@ -11,6 +13,7 @@ type envConfLockfile struct {
 }
 
 type EnvConf struct {
+	Sep      string
 	Repofile envConfRepofile
 	Lockfile envConfLockfile
 }
@@ -24,13 +27,20 @@ type EnvConf struct {
 // have a user configuration in a $HOME/.ypm directory
 // that allows more customization about how YPM works.
 func GetEnv() *EnvConf {
+	sep := "/"
+
+	if runtime.GOOS == "windows" {
+		sep = "\\"
+	}
+
 	return &EnvConf{
+		Sep: sep,
 		Repofile: envConfRepofile{
 			Name:    "package.json",
 			Version: "0.0.1",
 		},
 		Lockfile: envConfLockfile{
-			Name:    "package.lock",
+			Name:    "repository.lock",
 			Version: "1.0.0",
 		},
 	}

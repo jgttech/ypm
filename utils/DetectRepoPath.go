@@ -8,7 +8,7 @@ import (
 )
 
 func DetectRepoPath(ctxPath string) string {
-	env := env.GetEnv()
+	environ := env.GetEnv()
 	cwd := Cwd()
 	sep := "/"
 
@@ -33,9 +33,8 @@ func DetectRepoPath(ctxPath string) string {
 		for _, entry := range entries {
 			fileName := entry.Name()
 
-			if fileName == env.Lockfile.Name {
-				repoPath = subDir
-				break
+			if fileName == environ.Lockfile.Name {
+				return subDir
 			}
 		}
 	}

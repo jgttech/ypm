@@ -23,11 +23,8 @@ type YpmConf struct {
 func (conf *YpmConf) Write(dir string) {
 	fileName := env.GetEnv().Lockfile.Name
 	confPath := path.Join(dir, fileName)
-	exists := utils.PathExists(confPath)
 
-	if !exists {
-		utils.WriteYaml(confPath, conf)
-	}
+	utils.WriteYaml(confPath, conf)
 }
 
 func (conf *YpmConf) Read(dir string) {
