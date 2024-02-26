@@ -85,7 +85,6 @@ func Cmd(etx *conf.ExecutionContext) *cli.Command {
 							}
 
 							ypmConf.Write(cwd)
-
 						}
 
 						return spinner.SUCCESS, ""
