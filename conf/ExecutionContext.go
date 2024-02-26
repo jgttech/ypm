@@ -63,13 +63,13 @@ func (etx *ExecutionContext) Sync() {
 	ypmConf := &YpmConf{}
 	ypmConf.Read(etx.RepoPath)
 
-	globPath := path.Join(etx.RepoPath, "**", "package.json")
+	globPath := path.Join(etx.RepoPath, "**", etx.Env.Repofile.Name)
 	matches, err := filepathx.Glob(globPath)
 	utils.Check(err)
 
 	for _, match := range matches {
 		json := utils.ReadJson[PackageJson](match)
-		relativePath := strings.Split(strings.Split(match, etx.RepoPath)[1], etx.Env.Sep+"package.json")[0]
+		relativePath := strings.Split(strings.Split(match, etx.RepoPath)[1], etx.Env.Sep+etx.Env.Repofile.Name)[0]
 
 		if relativePath == etx.Env.Sep {
 			relativePath = "."
