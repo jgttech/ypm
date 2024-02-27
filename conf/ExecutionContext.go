@@ -59,6 +59,7 @@ func (etx *ExecutionContext) LoadConfig() {
 }
 
 func (etx *ExecutionContext) Sync() {
+	ypmShouldUpdate := false
 	ypmPackages := []YpmConfPackage{}
 	ypmConf := &YpmConf{}
 	ypmConf.Read(etx.RepoPath)
@@ -84,8 +85,35 @@ func (etx *ExecutionContext) Sync() {
 		})
 	}
 
-	ypmConf.Packages = ypmPackages
-	ypmConf.Write(etx.RepoPath)
+	if len(ypmConf.Packages) != len(ypmPackages) {
+		ypmShouldUpdate = true
+		ypmConf.Packages = ypmPackages
+	} else {
+		for idx, pkg := range ypmConf.Packages {
+			var ypmPkg *YpmConfPackage
+
+			for _, detectedPkg := range ypmPackages {
+				if detectedPkg.Name == pkg.Name {
+					ypmPkg = &detectedPkg
+					break
+				}
+			}
+
+			if ypmPkg != nil {
+				if ypmPkg.Version != pkg.Version || ypmPkg.Path != pkg.Path {
+					ypmShouldUpdate = true
+
+					ypmConf.Packages[idx].Name = ypmPkg.Name
+					ypmConf.Packages[idx].Version = ypmPkg.Version
+					ypmConf.Packages[idx].Path = ypmPkg.Path
+				}
+			}
+		}
+	}
+
+	if ypmShouldUpdate {
+		ypmConf.Write(etx.RepoPath)
+	}
 }
 
 func (etx *ExecutionContext) IsValidPackageName(name string) bool {
