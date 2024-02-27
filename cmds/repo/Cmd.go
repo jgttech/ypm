@@ -13,11 +13,24 @@ import (
 )
 
 func Cmd(etx *conf.ExecutionContext) *cli.Command {
+	var directory bool
+
 	return &cli.Command{
 		Name:    "repo",
 		Suggest: true,
 		Usage:   "Creates the initial repo setup for the YPM package manager",
+		Flags: []cli.Flag{
+			&cli.BoolFlag{
+				Name:        "directory",
+				Aliases:     []string{"D"},
+				Destination: &directory,
+				Value:       false,
+				OnlyOnce:    true,
+				Usage:       "Indicates that this command should also create a directory, instead of the user needing to create it.",
+			},
+		},
 		Action: func(ctx context.Context, cmd *cli.Command) error {
+			fmt.Println()
 			var (
 				cwd     = utils.Cwd()
 				project string
