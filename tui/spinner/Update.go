@@ -5,38 +5,38 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+func (self model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case cmd:
-		m.info = msg.info
-		m.status = msg.status
-		m.err = msg.err
+		self.info = msg.info
+		self.status = msg.status
+		self.err = msg.err
 
 		if msg.exit {
-			if m.quit != nil {
-				m.quit()
+			if self.quit != nil {
+				self.quit()
 			}
 
-			return m, tea.Quit
+			return self, tea.Quit
 		}
 
-		return m, nil
+		return self, nil
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "ctrl+c", "esc", "q":
-			m.exit = true
+			self.exit = true
 
-			if m.quit != nil {
-				m.quit()
+			if self.quit != nil {
+				self.quit()
 			}
 
-			return m, tea.Quit
+			return self, tea.Quit
 		}
 	case spinner.TickMsg:
 		var cmd tea.Cmd
-		m.spinner, cmd = m.spinner.Update(msg)
-		return m, cmd
+		self.spinner, cmd = self.spinner.Update(msg)
+		return self, cmd
 	}
 
-	return m, m.spinner.Tick
+	return self, self.spinner.Tick
 }

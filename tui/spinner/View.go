@@ -6,54 +6,45 @@ import (
 	"strconv"
 )
 
-func (m model) View() (s string) {
+func (self model) View() (s string) {
 	var text string
-	var status string
 	var indicator string
 	var explanation string
 
-	indicator = m.spinner.View()
-	text = m.msg
+	indicator = self.spinner.View()
+	text = self.msg
 
-	if m.status == 0 {
-		status = "[---] "
-	} else {
-		status = "[" + strconv.Itoa(m.status) + "] "
-	}
-
-	status = tui.DarkGray(status)
-
-	if m.status != 0 && m.status != SUCCESS && m.status != WARNING && m.status != FAILURE {
+	if self.status != 0 && self.status != SUCCESS && self.status != WARNING && self.status != FAILURE {
 		indicator = tui.Indicators.Error
-		explanation = "Invalid status code '" + strconv.Itoa(m.status) + "'. Must be "
+		explanation = "Invalid status code '" + strconv.Itoa(self.status) + "'. Must be "
 		explanation += strconv.Itoa(SUCCESS) + " (success), "
 		explanation += strconv.Itoa(WARNING) + " (warning), or "
 		explanation += strconv.Itoa(FAILURE) + " (failure)."
 	} else {
-		switch m.status {
+		switch self.status {
 		case SUCCESS:
-			indicator = tui.GreenText(tui.Indicators.Check)
-			text = tui.DarkGray(text)
+			indicator = tui.Theme.GreenText(tui.Indicators.Check)
+			text = tui.Theme.DarkGray(text)
 			break
 		case WARNING:
-			indicator = tui.YellowText(tui.Indicators.Warning)
-			text = tui.YellowText(text)
+			indicator = tui.Theme.YellowText(tui.Indicators.Warning)
+			text = tui.Theme.YellowText(text)
 			break
 		case FAILURE:
-			indicator = tui.ErrorText(tui.Indicators.Error)
-			text = tui.ErrorText(text)
+			indicator = tui.Theme.ErrorText(tui.Indicators.Error)
+			text = tui.Theme.ErrorText(text)
 			break
 		}
 	}
 
-	if m.info != "" {
-		explanation = m.info
+	if self.info != "" {
+		explanation = self.info
 	}
 
-	s += fmt.Sprintf("%s %s\n", indicator, tui.WhiteText(text))
+	s += fmt.Sprintf("%s %s\n", indicator, tui.Theme.WhiteText(text))
 
 	if explanation != "" {
-		s += fmt.Sprintf("  %s\n", tui.Gray(explanation))
+		s += fmt.Sprintf("  %s\n", tui.Theme.Gray(explanation))
 	}
 
 	return s

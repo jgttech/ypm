@@ -4,12 +4,12 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-func (m model) Init() tea.Cmd {
+func (self model) Init() tea.Cmd {
 	return func() tea.Msg {
 		msg := cmd{exit: true}
 
-		if m.init != nil {
-			code, message := m.init()
+		if self.init != nil {
+			code, message := self.init()
 
 			msg.status = code
 

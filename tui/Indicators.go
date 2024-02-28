@@ -2,7 +2,7 @@ package tui
 
 import "fmt"
 
-func toString(data []byte) string {
+func str(data []byte) string {
 	return fmt.Sprintf("%s", data)
 }
 
@@ -14,8 +14,8 @@ type indicators struct {
 }
 
 var Indicators indicators = indicators{
-	Info:    toString([]byte("i")),
-	Check:   toString([]byte("✓")),
-	Warning: toString([]byte("!")),
-	Error:   toString([]byte("ⅹ")),
+	Info:    str([]byte("i")),
+	Check:   str([]byte("✓")),
+	Warning: str([]byte("!")),
+	Error:   str([]byte("ⅹ")),
 }

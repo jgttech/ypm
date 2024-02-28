@@ -1,11 +1,9 @@
 package spinner
 
-import (
-	spnr "github.com/charmbracelet/bubbles/spinner"
-)
+import "github.com/charmbracelet/bubbles/spinner"
 
 type model struct {
-	spinner spnr.Model
+	spinner spinner.Model
 	err     string
 	exit    bool
 	status  int

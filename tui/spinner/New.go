@@ -20,16 +20,16 @@ type New struct {
 	Quit Quit
 }
 
-func (instance New) Run() (int, string) {
+func (self New) Run() (int, string) {
 	m := model{
-		msg:  instance.Msg,
-		done: instance.Done,
-		init: instance.Init,
-		quit: instance.Quit,
+		msg:  self.Msg,
+		done: self.Done,
+		init: self.Init,
+		quit: self.Quit,
 	}
 
 	m.spinner = spinner.New()
-	m.spinner.Style = tui.SpinnerStyle
+	m.spinner.Style = tui.Theme.SpinnerStyle
 	m.spinner.Spinner = spinner.MiniDot
 
 	result, err := tea.NewProgram(m).Run()
