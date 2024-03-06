@@ -7,34 +7,39 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-type InputEvent func(input string) string
-
 type New struct {
-	Question    string
+	Message     string
 	Placeholder string
 	CharLimit   int
 	Width       int
-	Focus       bool
-	OnChange    InputEvent
-	OnSubmit    InputEvent
+	Validate    textinput.ValidateFunc
 }
 
 func (self New) Run() (int, string) {
+	width := 20
+	charLimit := 156
+
 	ti := textinput.New()
 	ti.Placeholder = self.Placeholder
-	ti.CharLimit = self.CharLimit
-	ti.Width = self.Width
+
+	ti.Focus()
+
+	if self.Width > 0 {
+		width = self.Width
+	}
+
+	if self.CharLimit > 0 {
+		charLimit = self.CharLimit
+	}
+
+	ti.CharLimit = charLimit
+	ti.Width = width
 
 	m := model{
 		textinput:   ti,
-		question:    self.Question,
+		message:     self.Message,
 		placeholder: self.Placeholder,
-		onChange:    self.OnChange,
-		onSubmit:    self.OnSubmit,
-	}
-
-	if self.Focus {
-		ti.Focus()
+		validate:    self.Validate,
 	}
 
 	if _, err := tea.NewProgram(m).Run(); err != nil {

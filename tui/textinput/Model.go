@@ -1,11 +1,18 @@
 package textinput
 
-import "github.com/charmbracelet/bubbles/textinput"
+import (
+	"jgttech/ypm/utils"
+
+	"github.com/charmbracelet/bubbles/textinput"
+)
 
 type model struct {
 	textinput   textinput.Model
-	question    string
+	validate    textinput.ValidateFunc
+	message     string
 	placeholder string
-	onChange    InputEvent
-	onSubmit    InputEvent
 }
+
+const SUCCESS = utils.SUCCESS
+const WARNING = utils.WARNING
+const FAILURE = utils.FAILURE

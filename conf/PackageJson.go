@@ -8,9 +8,3 @@ type PackageJson struct {
 	Dependencies    map[string]string `json:"dependencies,omitempty"`
 	DevDependencies map[string]string `json:"devDependencies,omitempty"`
 }
-
-func NewPackageJson(preconfig string) *PackageJson {
-	json := &PackageJson{}
-
-	return json
-}

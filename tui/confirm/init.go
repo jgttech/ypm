@@ -1,4 +1,4 @@
-package textinput
+package confirm
 
 import (
 	"github.com/charmbracelet/bubbles/textinput"

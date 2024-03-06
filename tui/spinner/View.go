@@ -23,16 +23,16 @@ func (self model) View() (s string) {
 	} else {
 		switch self.status {
 		case SUCCESS:
-			indicator = tui.Theme.GreenText(tui.Indicators.Check)
+			indicator = tui.Theme.Green(tui.Indicators.Check)
 			text = tui.Theme.DarkGray(text)
 			break
 		case WARNING:
-			indicator = tui.Theme.YellowText(tui.Indicators.Warning)
-			text = tui.Theme.YellowText(text)
+			indicator = tui.Theme.Yellow(tui.Indicators.Warning)
+			text = tui.Theme.Yellow(text)
 			break
 		case FAILURE:
-			indicator = tui.Theme.ErrorText(tui.Indicators.Error)
-			text = tui.Theme.ErrorText(text)
+			indicator = tui.Theme.Red(tui.Indicators.Error)
+			text = tui.Theme.Red(text)
 			break
 		}
 	}
@@ -41,7 +41,7 @@ func (self model) View() (s string) {
 		explanation = self.info
 	}
 
-	s += fmt.Sprintf("%s %s\n", indicator, tui.Theme.WhiteText(text))
+	s += fmt.Sprintf("%s %s\n", indicator, tui.Theme.White(text))
 
 	if explanation != "" {
 		s += fmt.Sprintf("  %s\n", tui.Theme.Gray(explanation))

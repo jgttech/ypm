@@ -2,7 +2,7 @@ package spinner
 
 import (
 	"fmt"
-	"jgttech/ypm/exceptions"
+	"jgttech/ypm/errors"
 	"jgttech/ypm/tui"
 	"os"
 
@@ -10,14 +10,14 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-type Init func() (int, string)
-type Quit func()
+type initFunc func() (int, string)
+type quitFunc func()
 
 type New struct {
 	Msg  string
 	Done string
-	Init Init
-	Quit Quit
+	Init initFunc
+	Quit quitFunc
 }
 
 func (self New) Run() (int, string) {
@@ -37,7 +37,7 @@ func (self New) Run() (int, string) {
 	errorMsg := response.err
 
 	if err != nil {
-		exceptions.UnknownError(err)
+		errors.UnknownError(err)
 	}
 
 	if errorMsg != "" {
