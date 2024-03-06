@@ -34,7 +34,13 @@ func Main(etx *sys.ExecutionContext) *cli.Command {
 
 			if directory {
 				confirm.New{
-					Message: "Is this directory correct?",
+					Message: "1: Is this directory correct?",
+					Validate: func(s string) error {
+						return nil
+					},
+				}.Run()
+				confirm.New{
+					Message: "2: Is this directory correct?",
 					Validate: func(s string) error {
 						return nil
 					},
